@@ -26,16 +26,29 @@
       <div class="row">
         <div class="col-sm-12 col-md-3 col-lg-3"></div>
         <div class="col-sm-12 col-md-3 col-lg-6">
-          <form action="#" class="login-form">
+     <form action="{{ route('login') }}" method="POST" class="login-form">
+            @csrf
             <div class="form-title">
               <h3>Login</h3>
             </div>
-            <label for="student-name">Id</label>
-            <input type="text" class="student-id" id="student-id">
+                     <div class=" card card-default">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+            <label for="student-name">Email address</label>
+            <input type="text" class="student-id" name="email" id="student-id">
             <label for="student-password">Password</label>
-            <input type="text" class="student-password" id="student-password">
+            <input type="text" class="student-password" name="password" id="student-password">
             <div class="submit-button">
-              <button class="submit-btn"><a href="generate-routine.html">Login</button></a>
+               <input type="submit" class="submit-btn" name="btn" id="">
+              {{--  <button class="submit-btn"><a href="generate-routine.html">Login</button></a>  --}}
             </div>
           </form>
           <p>If you do not have an account? Please <a href="{{ route('student-registration') }}">Sign Up</a></p>

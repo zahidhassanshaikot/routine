@@ -40,25 +40,45 @@
   </header>
   <section id="student-registration">
     <div class="container">
+                @if(Session::get('message'))
+                <div class="alert alert-success" id="message">
+                    <h3 class=" text-center text-success"> {{ Session::get('message') }}</h3>
+                </div>
+            @endif
+            <div class=" card card-default">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
       <div class="row">
         <div class="col-sm-12 col-md-3 col-lg-3"></div>
         <div class="col-sm-12 col-md-3 col-lg-6">
-          <form action="#" class="student-registration-form">
+          <form action="{{ route('save-teacher-info') }}" method="POST" class="student-registration-form">
+            @csrf
             <div class="form-title">
               <h3>Teacher Registration</h3>
             </div>
             <label for="student-name">Name</label>
-            <input type="text" class="student-name" id="student-name">
+            <input type="text" class="student-name" name="name" id="student-name">
             <label for="student-name">Id</label>
-            <input type="text" class="student-id" id="student-id">
+            <input type="text" class="student-id" name="v_id" id="student-id">
+            <label for="email">Email</label>
+            <input type="text" class="student-id" name="email" >
             <label for="student-name">Teacher Department</label>
-            <input type="text" class="student-department" id="student-department">
+            <input type="text" class="student-department" name="dept" id="student-department">
             <label for="student-password">Password</label>
-            <input type="text" class="student-password" id="student-password">
+            <input type="text" class="student-password" name="password" id="student-password">
             <label for="student-password">Confirm Password</label>
-            <input type="text" class="confirm-password" id="confirm-password">
+            <input type="text" class="confirm-password" name="password_confirmation" id="confirm-password">
             <div class="submit-button">
-              <button class="submit-btn">Submit</button>
+              {{--  <button class="submit-btn">Submit</button>  --}}
+              <input type="submit" class="submit-btn" name="btn" id="">
             </div>
           </form>
           <p>If you have an account? Please <a href="{{ route('admin-login') }}">Login</a></p>

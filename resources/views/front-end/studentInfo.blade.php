@@ -25,7 +25,8 @@
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/index-01.css">
 </head>
 <body>
-  <header>
+  @include('front-end.header')
+  {{--  <header>
     <nav class="navbar navbar-expand-lg">
         <div class="navbar-brand">
           <a class="logo js-scroll-trigger" href="index.html"><img src="{{ asset('front-end') }}/img/logo1.jpg"></a>
@@ -48,7 +49,7 @@
           </ul>
       </div>
     </nav>
-  </header>
+  </header>  --}}
     <div class="content-wrapper container-fluid">
       <div class="dashboard-contents">
         <div class="contents-inner">

@@ -39,9 +39,13 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link" href="{{ route('logout') }}" role="button">
+              <a class="nav-link" href="{{ route('logout') }}" role="button"  onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
                 <i class="fa fa-power-off"></i> <span class="menu-title">Logout</span>
               </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+         @csrf
+         </form>
             </li>
 
           </ul>
