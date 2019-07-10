@@ -28,6 +28,7 @@ Route::post('save-student-info', 'FrontEndController@saveStudentInfo')->name('sa
 Route::post('save-teacher-info', 'FrontEndController@saveTeacherInfo')->name('save-teacher-info');
 
 Route::get('register/course/{id}', 'FrontEndController@regCourse')->name('register-course');
+Route::get('remove/user/{id}', 'FrontEndController@removeUser')->name('remove-user');
 
 Route::get('student-info', 'FrontEndController@studentInfo')->name('student-info');
 Route::get('generate-routine', 'FrontEndController@generateRoutine')->name('generate-routine');

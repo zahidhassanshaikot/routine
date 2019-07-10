@@ -95,8 +95,18 @@ class FrontEndController extends Controller
             'student_id'=>$id
         ]);
     }
+
     public function studentInfo(){
-        return view('front-end.studentInfo');
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', '=', 'Student');
+        })->orderBy('created_at', 'desc')->get();
+
+        return view('front-end.studentInfo',['users'=>$users]);
+    }
+    public function removeUser($id){
+        User::find($id)->delete();
+
+        return redirect()->back();
     }
 
     public function generateRoutine(){

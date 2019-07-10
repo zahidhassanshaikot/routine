@@ -64,137 +64,49 @@
                   <table id="data-table" class="table data-table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>#No</th>
+                     
                         <th>Student Id</th>
                         <th>Name</th>
-                        <th>Semester</th>
+                        <th>Email</th>
+                        <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </thead>
 
                     <tbody>
+                      @foreach($users as $user)
                       <tr>
-                        <td>01</td>
+                       
                         <td>
-                          <h6>12345</h6>
+                          <h6>{{ $user->v_id }}</h6>
                         </td>
                         <td>
                            <div class="name">
-                             <h5>Md Rakibul Islam</h5>
+                             <h5>{{ $user->name }}</h5>
                            </div>
                         </td>
                         <td>
-                          <h6>Spring 19</h6>
+                          <h6>{{ $user->email }}</h6>
+                        </td>
+                        <td>
+                          <h6>{{ $user->dept }}</h6>
                         </td>
                         <td class="action">
                           <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
+                            <li><a href="{{ route('remove-user',['id'=>$user->id]) }}" class="profile">Remove</a></li>
                           </ul>
                         </td>
                       </tr>
-                      <tr>
-                        <td>02</td>
-                        <td>
-                          <h6>12642323</h6>
-                        </td>
-                        <td>
-                           <div class="name">
-                             <h5>Md Rafiqul Islam</h5>
-                           </div>
-                        </td>
-                        <td>
-                          <h6>Spring 19</h6>
-                        </td>
-                        <td class="action">
-                          <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>03</td>
-                        <td>
-                          <h6>123689</h6>
-                        </td>
-                        <td>
-                           <div class="name">
-                             <h5>Md Rabiul Islam</h5>
-                           </div>
-                        </td>
-                        <td>
-                          <h6>Summer 19</h6>
-                        </td>
-                        <td class="action">
-                          <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>04</td>
-                        <td>
-                          <h6>1234585</h6>
-                        </td>
-                        <td>
-                           <div class="name">
-                             <h5>Md Ridoy</h5>
-                           </div>
-                        </td>
-                        <td>
-                          <h6>Fall 19</h6>
-                        </td>
-                        <td class="action">
-                          <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>05</td>
-                        <td>
-                          <h6>12345867</h6>
-                        </td>
-                        <td>
-                           <div class="name">
-                             <h5>Md Ariful Islam</h5>
-                           </div>
-                        </td>
-                        <td>
-                          <h6>Spring 19</h6>
-                        </td>
-                        <td class="action">
-                          <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
-                          </ul>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>06</td>
-                        <td>
-                          <h6>12345</h6>
-                        </td>
-                        <td>
-                           <div class="name">
-                             <h5>Md Naimul Hasan</h5>
-                           </div>
-                        </td>
-                        <td>
-                          <h6>Spring 19</h6>
-                        </td>
-                        <td class="action">
-                          <ul>
-                            <li><a href="#" target="blank" class="profile">Remove</a></li>
-                          </ul>
-                        </td>
-                      </tr>
+       @endforeach
                     </tbody>
 
                     <tfoot>
                       <tr>
-                        <th>#No</th>
-                        <th>Student Id</th>
+                       
+                            <th>Student Id</th>
                         <th>Name</th>
-                        <th>Semester</th>
+                        <th>Email</th>
+                        <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
