@@ -35,7 +35,16 @@ class FrontEndController extends Controller
     }
 
     public function studentRegistration(){
-        return view('front-end.studentRegistration');
+        if(Auth::check()){
+            if(Auth::user()->hasRole('Student')){
+       return redirect()->route('register-course', ['id' => Auth()->user()->id]);
+       }else{
+           return view('front-end.studentRegistration');
+       }
+        }else {
+            
+             return view('front-end.studentRegistration');
+        }
     }
 
     public function saveStudentInfo(Request $request){
@@ -59,7 +68,12 @@ class FrontEndController extends Controller
 
             $user->save();
             $user->attachRole(Role::where('name', 'Student')->first());
-            Auth::login($user);
+            if(Auth::check()){
+
+            }else {
+                Auth::login($user);
+            }
+            
 
         return redirect()->route('register-course', ['id' => $user->id]);
     }
@@ -119,5 +133,8 @@ class FrontEndController extends Controller
 
     public function routine(){
         return view('front-end.routine');
+    }
+    public function saveRegCourseInfo(Request $request){
+        return $request;
     }
 }

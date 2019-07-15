@@ -42,7 +42,8 @@
       </div>
     </nav>
   </header>
-  <section id="register-course">
+
+<section id="register-course">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -50,27 +51,41 @@
             <div class="page-title">
               <h2>Register Your Course</h2>
             </div>
-            <form action="#" class="register-course-form">
+            <form action="{{ route('save-reg-course-info') }}" class="register-course-form" method="POST">
+              @csrf
               <h5 class="type">Course Type</h5>
               <div class="course-type-wrapper">
                 <div class="course-type">
                     <div class="improvement-overlap">
-                      <input type="radio" value="improvement" id="improvement" name="course-type">
-                      <label for="improvement">Improvement</label>
-                      <input type="radio" value="overlap" id="overlap" name="course-type">
-                      <label for="overlap">Overlap</label>
+                      <label for="improvement">Registration Type :</label>
+                      <select class="course-pt-1" name="exam_type[]">
+                        <option>Improvement</option>
+                        <option>Overlap</option>
+                      </select>
                     </div>
                     <div class="teacher-initial">
                       <label for="teacher-initial">Teacher Initial :</label>
-                      <input type="text">
+                      <input type="text" name="teacher_init[]">
                     </div>
                     <div class="course-code">
                       <label for="course-code">Course Code :</label>
-                      <input type="text">
+                      <select class="course-pt-1" name="course_code[]">
+                        <option>Course Code</option>
+                        <option>SWE101</option>
+                        <option>SWE102</option>
+                        <option>SWE103</option>
+                        <option>SWE104</option>
+                      </select>
                     </div>
                     <div class="course-title">
                       <label for="course-code">Course Title :</label>
-                      <input type="text">
+                      <select class="course-pt-1" name="course_title[]">
+                        <option>Course Title</option>
+                        <option>OOP</option>
+                        <option>Testing</option>
+                        <option>System Analysis</option>
+                        <option>Math</option>
+                      </select>
                     </div>
                 </div>
               </div>
@@ -78,7 +93,8 @@
                 <button class="add-more-btn">Add More</button>
               </div>
               <div class="submit-button">
-                <button class="submit-btn">Submit</button>
+                 <input type="submit" name="btn" class="submit-btn btn">
+                {{--  <button class="submit-btn">Submit</button>  --}}
               </div>
             </form>
           </div>
@@ -86,6 +102,60 @@
       </div>
     </div>
   </section>
+
+
+
+
+  {{--  <section id="register-course">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="register-course">
+            <div class="page-title">
+              <h2>Register Your Course</h2>
+            </div>
+            <form action="{{ route('save-reg-course-info') }}" class="register-course-form" method="POST">
+              @csrf
+              <h5 class="type">Course Type</h5>
+              <div class="course-type-wrapper">
+                <div class="courseType">
+                    <div class="improvement-overlap">
+                      <input type="radio" value="improvement" id="improvement" name="exam_type[]">
+                      <label for="improvement">Improvement</label>
+                      <input type="radio" value="overlap" id="overlap" name="exam_type[]">
+                      <label for="overlap">Overlap</label>
+                    </div>
+                    <div class="teacher-initial">
+                      <label for="teacher-initial">Teacher Initial :</label>
+                      <input type="text" name="teacher_init[]">
+                    </div>
+                    <div class="course-code">
+                      <label for="course-code">Course Code :</label>
+                      <input type="text" name="course_code[]">
+                    </div>
+                    <div class="course-title">
+                      <label for="course-code">Course Title :</label>
+                      <input type="text" name="course_title[]">
+                    </div>
+                </div>
+              </div>
+              <div class="add-more">
+                <button class="add-more-btn">Add More</button>
+              </div>
+              <div class="submit-button">
+                <input type="submit" name="btn" class="submit-btn btn">
+               
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  --}}
+
+
+
+
   <footer>
     <div class="container">
       <div class="row">

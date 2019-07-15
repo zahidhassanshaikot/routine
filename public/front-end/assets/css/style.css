@@ -1679,3 +1679,16 @@ footer {
   background: #2dced4;
   color: #fff;
 }
+
+.course-pt-1 {
+  border: 1px solid #ccc;
+}
+
+.change-option {
+  width: 100%;
+  padding-left: 15px;
+  margin-bottom: 30px;
+  border: 1px solid #000;
+  height: 30x;
+}
+

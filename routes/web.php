@@ -26,6 +26,7 @@ Route::get('contuct-us', 'FrontEndController@contuctUs')->name('contuct-us');
 Route::get('student-registration', 'FrontEndController@studentRegistration')->name('student-registration');
 Route::post('save-student-info', 'FrontEndController@saveStudentInfo')->name('save-student-info');
 Route::post('save-teacher-info', 'FrontEndController@saveTeacherInfo')->name('save-teacher-info');
+Route::post('save/reg/course-info', 'FrontEndController@saveRegCourseInfo')->name('save-reg-course-info');
 
 Route::get('register/course/{id}', 'FrontEndController@regCourse')->name('register-course');
 Route::get('remove/user/{id}', 'FrontEndController@removeUser')->name('remove-user');
