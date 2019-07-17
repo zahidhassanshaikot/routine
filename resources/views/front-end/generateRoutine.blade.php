@@ -55,26 +55,27 @@
           <div class="page-title">
             <h5>Generate Routine</h5>
           </div>
-          <form action="admin.php">
+          <form action="{{ route('admin-generate-routine') }}" method="POST">
+            @csrf
             <ul class="routine-generate">
                 <li>
-                  <select name="" id="">
-                    <option value="Semester">Semester</option>
-                    <option value="Semester">Spring 19</option>
-                    <option value="Semester">Summer 19</option>
-                    <option value="Semester">Fall 19</option>
+                  <select name="semister" id="" required>
+                    <option value="">Semester</option>
+                    <option value="Spring {{ Carbon\Carbon::now()->year }}">Spring {{ Carbon\Carbon::now()->year }}</option>
+                    <option value="Summer {{ Carbon\Carbon::now()->year }}">Summer {{ Carbon\Carbon::now()->year }}</option>
+                    <option value="Fall {{ Carbon\Carbon::now()->year }}">Fall {{ Carbon\Carbon::now()->year }}</option>
                   </select>
                 </li>
                 <li>
-                  <select name="" id="">
-                    <option value="Semester">Exam</option>
-                    <option value="Semester">Mid Term</option>
-                    <option value="Semester">Final</option>
+                  <select name="exam_type" id="" required>
+                    <option value="">Exam</option>
+                    <option value="Mid Term">Mid Term</option>
+                    <option value="Final">Final</option>
                   </select>
                 </li>
                 <li>
                   <div class="generate-button submit-button">
-                    <button href="#" class="submit-btn"><a  href="{{ route('admin-generate-routine') }}"> Generate Routine</button></a>
+                    <input type="submit" class="btn btn-info" name="btn" value="Generate Routine"> 
                   </div>
                 </li>
               </ul>

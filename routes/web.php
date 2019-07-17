@@ -33,7 +33,7 @@ Route::get('remove/user/{id}', 'FrontEndController@removeUser')->name('remove-us
 
 Route::get('student-info', 'FrontEndController@studentInfo')->name('student-info');
 Route::get('generate-routine', 'FrontEndController@generateRoutine')->name('generate-routine');
-Route::get('admin/generate-routine', 'FrontEndController@adminGenerateRoutine')->name('admin-generate-routine');
+Route::post('admin/generate-routine', 'FrontEndController@adminGenerateRoutine')->name('admin-generate-routine');
 Route::get('routine', 'FrontEndController@routine')->name('routine');
 
 

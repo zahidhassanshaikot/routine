@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Role;
 use App\User;
+use App\RegisterCourse;
 use DB;
 use File;
 use Image;
@@ -124,10 +125,15 @@ class FrontEndController extends Controller
     }
 
     public function generateRoutine(){
+
         return view('front-end.generateRoutine');
     }
 
-    public function adminGenerateRoutine(){
+    public function adminGenerateRoutine( Request $request){
+        $obj_regStudent=RegisterCourse::where('exam_type',$request->exam_type)
+        ->where('semister',$request->semister)->groupBy('course_title','semister')
+        ->select('course_title','semister',DB::raw('count(*) as total'))->get();
+        return $obj_regStudent;
         return view('front-end.adminGenerateRoutine');
     }
 
@@ -135,6 +141,21 @@ class FrontEndController extends Controller
         return view('front-end.routine');
     }
     public function saveRegCourseInfo(Request $request){
-        return $request;
+        $len=count($request->reg_type);
+
+for($i=0;$i<$len;$i++){
+    $obj_RegisterCourse=new RegisterCourse();
+    $obj_RegisterCourse->student_id=$request->student_id;
+    $obj_RegisterCourse->reg_type=$request->reg_type[$i];
+    $obj_RegisterCourse->teacher_init=$request->teacher_init[$i];
+    $obj_RegisterCourse->course_code=$request->course_code[$i];
+    $obj_RegisterCourse->course_title=$request->course_title[$i];
+    $obj_RegisterCourse->exam_type=$request->exam_type[$i];
+    $obj_RegisterCourse->semister=$request->semister[$i];
+    $obj_RegisterCourse->save();
+
+}
+
+        return redirect('/');
     }
 }

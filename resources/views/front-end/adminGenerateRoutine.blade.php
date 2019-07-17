@@ -83,142 +83,27 @@
                         <div class="time">
                           12 pm
                         </div>
-                        <button class="edit">Edit</button>
+                       
                       </td>
                       <td>
                           <div>
                             <h6>System Analysis - <span class="student-amount">04</span></h6>
                           </div>
-                          <div>
-                            <h6>Oop - <span class="student-amount">05</span></h6>
-                          </div>
+                          
                       </td>
                       <td>
                         <h6>501 AB</h6>
-                        <button class="edit">Edit</button>
+                      
                       </td>
                       <td class="action">
                         <ul>
                           <li><a href="#" target="blank" class="profile">Save</a></li>
+                          <li><a href="#" data-toggle="modal" data-target="#dateNtime" target="blank" class="profile">Edit</a></li>
+
                         </ul>
                       </td>
                     </tr>
-                    <tr>
-                      <td>02</td>
-                      <td>
-                        <div class="date">
-                          <h6>4-05-2019</h6>
-                        </div>
-                        <div class="time">
-                          12 pm
-                        </div>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td>
-                          <div>
-                            <h6>Data Analysis - <span class="student-amount">06</span></h6>
-                          </div>
-                          <div>
-                            <h6>C programming - <span class="student-amount">07</span></h6>
-                          </div>
-                      </td>
-                      <td>
-                        <h6>601 AB</h6>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td class="action">
-                        <ul>
-                          <li><a href="#" target="blank" class="profile">Save</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>03</td>
-                      <td>
-                        <div class="date">
-                          <h6>6-05-2019</h6>
-                        </div>
-                        <div class="time">
-                          12 pm
-                        </div>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td>
-                          <div>
-                            <h6>Testing - <span class="student-amount">06</span></h6>
-                          </div>
-                          <div>
-                            <h6>Accounting - <span class="student-amount">08</span></h6>
-                          </div>
-                      </td>
-                      <td>
-                        <h6>504 AB</h6>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td class="action">
-                        <ul>
-                          <li><a href="#" target="blank" class="profile">Save</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>04</td>
-                      <td>
-                        <div class="date">
-                          <h6>7-05-2019</h6>
-                        </div>
-                        <div class="time">
-                          12 pm
-                        </div>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td>
-                          <div>
-                            <h6>Softwate Requirement - <span class="student-amount">04</span></h6>
-                          </div>
-                          <div>
-                            <h6>Java programming - <span class="student-amount">15</span></h6>
-                          </div>
-                      </td>
-                      <td>
-                        <h6>401 AB</h6>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td class="action">
-                        <ul>
-                          <li><a href="#" target="blank" class="profile">Save</a></li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>05</td>
-                      <td>
-                        <div class="date">
-                          <h6>4-05-2019</h6>
-                        </div>
-                        <div class="time">
-                          12 pm
-                        </div>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td>
-                          <div>
-                            <h6>Data Analysis - <span class="student-amount">06</span></h6>
-                          </div>
-                          <div>
-                            <h6>C programming - <span class="student-amount">07</span></h6>
-                          </div>
-                      </td>
-                      <td>
-                        <h6>601 AB</h6>
-                        <button class="edit">Edit</button>
-                      </td>
-                      <td class="action">
-                        <ul>
-                          <li><a href="#" target="blank" class="profile">Save</a></li>
-                        </ul>
-                      </td>
-                    </tr>
+            
                   </tbody>
 
                   <tfoot>
@@ -251,6 +136,31 @@
       </footer><!-- /.site-footer -->
     </div><!-- /.dashboard-contents -->
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="dateNtime" tabindex="-1" role="dialog" aria-labelledby="dateNtime" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Change Date and Time</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="change-option">
+          <label>Change Date : </label>
+          <input type="date" class="change-option" placeholder="Change Date"></input>
+          <label>Change Time : </label>
+          <input class="change-option" placeholder="Change Time"></input>
+           <label>Change Subject Code : </label>
+          <input class="change-option" placeholder="Change Room No"></input>
+          <input class="btn btn-info" type="submit" name="btn" ></input>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
   <script src="{{ asset('front-end') }}/assets/js/jquery-3.2.1.slim.min.js"></script>
