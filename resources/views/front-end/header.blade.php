@@ -32,11 +32,14 @@
     @endauth
       @guest
 			<li class="nav-item">
-              <a class="nav-link" href="{{ route('admin-login') }}">Admin</a>
+              <a class="nav-link" href="{{ route('admin-login') }}">Login</a>
       </li>
       @endguest
 			@auth
           <li class="nav-item">
+          <a class="nav-link" href="{{ route('routine') }}">Routine</a>
+         
+      </li>          <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">Logout</a>
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

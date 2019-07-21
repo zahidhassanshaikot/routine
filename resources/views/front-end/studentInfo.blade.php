@@ -26,33 +26,16 @@
 </head>
 <body>
   @include('front-end.header')
-  {{--  <header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="navbar-brand">
-          <a class="logo js-scroll-trigger" href="index.html"><img src="{{ asset('front-end') }}/img/logo1.jpg"></a>
-        </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register-course.html">Register Course</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="generate-routine.html">Generate Routine</a>
-            </li>
-          </ul>
-      </div>
-    </nav>
-  </header>  --}}
+
     <div class="content-wrapper container-fluid">
       <div class="dashboard-contents">
+
         <div class="contents-inner">
+             @if(Session::get('message'))
+                <div class="alert alert-success" id="message">
+                    <h4 class=" text-center text-success"> {{ Session::get('message') }}</h4>
+                </div>
+            @endif
           <div class="row">
             <div class="col-12">
               <div class="section-content">
@@ -65,6 +48,7 @@
                     <thead>
                       <tr>
                      
+                        <th>DB Id</th>
                         <th>Student Id</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -78,6 +62,8 @@
                       <tr>
                        
                         <td>
+                          <h6>{{ $user->id }}</h6>
+                        </td>                        <td>
                           <h6>{{ $user->v_id }}</h6>
                         </td>
                         <td>
@@ -100,16 +86,7 @@
        @endforeach
                     </tbody>
 
-                    <tfoot>
-                      <tr>
-                       
-                            <th>Student Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Department</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div><!-- /.content-details -->
               </div>

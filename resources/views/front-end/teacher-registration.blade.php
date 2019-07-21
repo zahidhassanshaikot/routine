@@ -20,7 +20,8 @@
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/style.css">
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/responsive.css">
 <body>
-  <header>
+  @include('front-end.header')
+<!--   <header>
     <nav class="navbar navbar-expand-lg">
         <div class="navbar-brand">
           <a class="logo js-scroll-trigger" href="routine.html">Routine</a>
@@ -37,7 +38,7 @@
           </ul>
       </div>
     </nav>
-  </header>
+  </header> -->
   <section id="student-registration">
     <div class="container">
                 @if(Session::get('message'))

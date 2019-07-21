@@ -25,30 +25,7 @@
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/index-01.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="navbar-brand">
-          <a class="logo js-scroll-trigger" href="{{ route('/') }}"><img src="{{ asset('front-end') }}/img/logo1.jpg"></a>
-        </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="{{ route('/') }}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register-course.html">Register Course</a>
-            </li>
-	<li class="nav-item">
-              <a class="nav-link" href="{{ route('generate-routine') }}">Generate Routine</a>
-            </li>
-          </ul>
-      </div>
-    </nav>
-  </header>
+  @include('front-end.header')
     <div class="content-wrapper container-fluid">
       <div class="dashboard-contents">
         <div class="contents-inner">
@@ -71,126 +48,31 @@
                     </thead>
 
                     <tbody>
+                      @foreach($obj_routine as $routine)
                       <tr>
-                        <td>01</td>
+                        <td>{{ $routine->id }}</td>
                         <td>
                           <div class="date">
-                            <h6>2-05-2019</h6>
+                            <h6>{{ $routine->exam_date }}</h6>
                           </div>
                           <div class="time">
-                            12 pm
+                            {{ $routine->exam_time }}
                           </div>
                         </td>
                         <td>
                             <div>
-                              <h6>System Analysis - <span class="student-amount">04</span></h6>
+                              <h6>{{ $routine->subject }} - <span class="student-amount">{{ $routine->total }}</span></h6>
                             </div>
-                            <div>
-                              <h6>Oop - <span class="student-amount">05</span></h6>
-                            </div>
+                           
                         </td>
                         <td>
-                          <h6>501 AB</h6>
+                          <h6>{{ $routine->room_no }}</h6>
                         </td>
                       </tr>
-                      <tr>
-                        <td>02</td>
-                        <td>
-                          <div class="date">
-                            <h6>4-05-2019</h6>
-                          </div>
-                          <div class="time">
-                            12 pm
-                          </div>
-                        </td>
-                        <td>
-                            <div>
-                              <h6>Data Analysis - <span class="student-amount">06</span></h6>
-                            </div>
-                            <div>
-                              <h6>C programming - <span class="student-amount">07</span></h6>
-                            </div>
-                        </td>
-                        <td>
-                          <h6>601 AB</h6>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>03</td>
-                        <td>
-                          <div class="date">
-                            <h6>6-05-2019</h6>
-                          </div>
-                          <div class="time">
-                            12 pm
-                          </div>
-                        </td>
-                        <td>
-                            <div>
-                              <h6>Testing - <span class="student-amount">06</span></h6>
-                            </div>
-                            <div>
-                              <h6>Accounting - <span class="student-amount">08</span></h6>
-                            </div>
-                        </td>
-                        <td>
-                          <h6>504 AB</h6>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>04</td>
-                        <td>
-                          <div class="date">
-                            <h6>7-05-2019</h6>
-                          </div>
-                          <div class="time">
-                            12 pm
-                          </div>
-                        </td>
-                        <td>
-                            <div>
-                              <h6>Softwate Requirement - <span class="student-amount">04</span></h6>
-                            </div>
-                            <div>
-                              <h6>Java programming - <span class="student-amount">15</span></h6>
-                            </div>
-                        </td>
-                        <td>
-                          <h6>401 AB</h6>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>05</td>
-                        <td>
-                          <div class="date">
-                            <h6>4-05-2019</h6>
-                          </div>
-                          <div class="time">
-                            12 pm
-                          </div>
-                        </td>
-                        <td>
-                            <div>
-                              <h6>Data Analysis - <span class="student-amount">06</span></h6>
-                            </div>
-                            <div>
-                              <h6>C programming - <span class="student-amount">07</span></h6>
-                            </div>
-                        </td>
-                        <td>
-                          <h6>601 AB</h6>
-                        </td>
-                      </tr>
+                    @endforeach
                     </tbody>
 
-                    <tfoot>
-                      <tr>
-                        <th>#No</th>
-                        <th>Date/time</th>
-                        <th>Subject</th>
-                        <th>Room No</th>
-                      </tr>
-                    </tfoot>
+             
                   </table>
                   <div class="print-button">
                     <a href="javascript:window.print()" class="print-button">Print Routine</a>
@@ -208,7 +90,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="copyright-area">
-            <p>&copy; Developed by <a href="#">Abu Baker Siddique</a></p>
+            <p>&copy; Developed by <a href="#">Sajib</a></p>
           </div>
         </div>
       </div>

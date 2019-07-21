@@ -21,41 +21,8 @@
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/responsive.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="navbar-brand">
-          <a class="logo js-scroll-trigger" href="index.php">Routine</a>
-        </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-      
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-              <a class="nav-link active" href="{{ route('/') }}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="student-registration.html">Register Course</a>
-			</li>
-			@guest
-			<li class="nav-item">
-              <a class="nav-link" href="{{ route('admin-login') }}">Admin</a>
-			</li>
-			@endguest
-			@auth
-			<li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-			</li>
-			
-			@endauth
-				<li class="nav-item">
-              <a class="nav-link" href="{{ route('contuct-us') }}">Contuct us</a>
-            </li>
-          </ul>
-      </div>
-    </nav>
-  </header>
+    @include('front-end.header')
+
   <!--Banner part---->
   <section id="hero">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

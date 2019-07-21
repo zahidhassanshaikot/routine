@@ -33,7 +33,9 @@ Route::get('remove/user/{id}', 'FrontEndController@removeUser')->name('remove-us
 
 Route::get('student-info', 'FrontEndController@studentInfo')->name('student-info');
 Route::get('generate-routine', 'FrontEndController@generateRoutine')->name('generate-routine');
-Route::post('admin/generate-routine', 'FrontEndController@adminGenerateRoutine')->name('admin-generate-routine');
+Route::post('save/admin/generate-routine', 'FrontEndController@saveAdminGenerateRoutine')->name('save-admin-generate-routine');
+Route::post('save/routine-data', 'FrontEndController@saveRoutineData')->name('save-routine-data');
+Route::get('admin-generate-routine', 'FrontEndController@adminGenerateRoutine')->name('admin-generate-routine');
 Route::get('routine', 'FrontEndController@routine')->name('routine');
 
 

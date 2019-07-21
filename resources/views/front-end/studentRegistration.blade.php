@@ -21,7 +21,8 @@
   <link rel="stylesheet" href="{{ asset('front-end') }}/assets/css/responsive.css">
 </head>
 <body>
-  <header>
+  @include('front-end.header')
+<!--   <header>
     <nav class="navbar navbar-expand-lg">
         <div class="navbar-brand">
           <a class="logo js-scroll-trigger" href="{{ route('routine') }}">Routine</a>
@@ -42,7 +43,7 @@
           </ul>
       </div>
     </nav>
-  </header>
+  </header> -->
  
   <section id="student-registration">
      

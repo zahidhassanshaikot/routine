@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Role;
 use App\User;
+use App\Routine;
+use App\TempDBRotine;
 use App\RegisterCourse;
 use DB;
 use File;
@@ -27,13 +29,24 @@ class FrontEndController extends Controller
         return view('front-end.student-login');
     }
 
+
     public function teacherRegistration(){
         return view('front-end.teacher-registration');
     }
 
+
+
+
+
+
     public function contuctUs(){
         return view('front-end.contuctUs');
     }
+
+
+
+
+
 
     public function studentRegistration(){
         if(Auth::check()){
@@ -47,6 +60,13 @@ class FrontEndController extends Controller
              return view('front-end.studentRegistration');
         }
     }
+
+
+
+
+
+
+
 
     public function saveStudentInfo(Request $request){
         $this->validate($request, [
@@ -79,6 +99,13 @@ class FrontEndController extends Controller
         return redirect()->route('register-course', ['id' => $user->id]);
     }
 
+
+
+
+
+
+
+
     public function saveTeacherInfo(Request $request){
         $this->validate($request, [
             'name' => 'required|max:30|min:2',
@@ -105,11 +132,20 @@ class FrontEndController extends Controller
         return redirect()->route('/');
     }
 
+
+
+
+
     public function regCourse($id){
           return view('front-end.register-course',[
             'student_id'=>$id
         ]);
     }
+
+
+
+
+
 
     public function studentInfo(){
         $users = User::whereHas('roles', function ($query) {
@@ -118,28 +154,155 @@ class FrontEndController extends Controller
 
         return view('front-end.studentInfo',['users'=>$users]);
     }
+
+
+
     public function removeUser($id){
+        $regCourseStudent=RegisterCourse::where('student_id',$id)->get();
+        foreach ($regCourseStudent as $data) {
+        $data->delete();
+    }
+     
+
         User::find($id)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message','Student Info Successfully Deleted');
     }
+
+
+
+
 
     public function generateRoutine(){
 
         return view('front-end.generateRoutine');
     }
 
-    public function adminGenerateRoutine( Request $request){
+
+
+
+    public function saveAdminGenerateRoutine( Request $request){
         $obj_regStudent=RegisterCourse::where('exam_type',$request->exam_type)
         ->where('semister',$request->semister)->groupBy('course_title','semister')
         ->select('course_title','semister',DB::raw('count(*) as total'))->get();
-        return $obj_regStudent;
-        return view('front-end.adminGenerateRoutine');
+         $t= $obj_regStudent->count();
+         // return $obj_regStudent[0];
+         TempDBRotine::truncate();
+         Routine::truncate();
+    for($i=0;$i<$t;$i++){
+            $obj_temp=new TempDBRotine();
+            $obj_temp->course_title=$obj_regStudent[$i]->course_title;
+            $obj_temp->semister=$obj_regStudent[$i]->semister;
+            $obj_temp->total_reg=$obj_regStudent[$i]->total;
+            $obj_temp->save();
+    }
+    $obj_data=TempDBRotine::all();
+    return redirect('admin-generate-routine');
+        // return view('front-end.adminGenerateRoutine',['obj_data'=>$obj_data]);
     }
 
-    public function routine(){
-        return view('front-end.routine');
+public function saveRoutineData(Request $request){
+
+    $this->validate($request, [
+            'exam_date' => 'required',
+            'exam_time' => 'required',
+            'room_no' => 'required',
+            
+    ]);
+    $obj_routine=Routine::all();
+
+    $course_title= $request->course_title;
+
+
+    $obj_temp=TempDBRotine::find($request->reg_id);
+    // $stu=RegisterCourse::where('course_title',$obj_temp->course_title)->get();
+
+
+foreach ($obj_routine as $value) {
+$sub=$value->subject;
+
+    $oobj=Db::table('register_courses as t1')
+    ->join('register_courses as t2','t1.student_id','=','t2.student_id')
+    ->where('t1.student_id',$request->reg_id)
+    ->where(function($query) use ($course_title,$sub){
+        $query->where('t2.course_title', '=', $sub);
+        $query->where('t1.course_title', '=', $course_title);
+        
+    })->select('t2.*')->get();
+
+//     SELECT a.*,b.* FROM `register_courses` as a JOIN register_courses as b 
+// WHERE a.student_id=b.student_id && a.course_title='OOP' && b.course_title='Math'
+
+
+
+// return $oobj;
+
+    foreach ($oobj as $st) {
+        if($course_title!=$st->course_title && $value->exam_time==$request->exam_time && $value->exam_date==$request->exam_date ){
+            return redirect()->back()->with('message','Some student have exam on this date on this time. Please change date or time');
+
+        }else{
+                
+    $obj_routine=new Routine();
+    $obj_routine->subject=$obj_temp->course_title;
+    $obj_routine->exam_date=$request->exam_date;
+    $obj_routine->exam_time=$request->exam_time;
+    $obj_routine->room_no=$request->room_no;
+    if($obj_temp->total_reg>51){
+    $obj_routine->total=50;
+    $obj_temp->total_reg=$obj_temp->total_reg-50;
+    $obj_temp->save();
+}else{
+    $obj_routine->total=$obj_temp->total_reg;
+        $obj_temp->total_reg=0;
+    $obj_temp->save();
+}
+    $obj_routine->save();
+    return redirect()->back()->with('message','Saved to routine');
+
+        }
     }
+}
+
+
+  
+    $obj_routine=new Routine();
+    $obj_routine->subject=$obj_temp->course_title;
+    $obj_routine->exam_date=$request->exam_date;
+    $obj_routine->exam_time=$request->exam_time;
+    $obj_routine->room_no=$request->room_no;
+    if($obj_temp->total_reg>51){
+    $obj_routine->total=50;
+    $obj_temp->total_reg=$obj_temp->total_reg-50;
+    $obj_temp->save();
+}else{
+    $obj_routine->total=$obj_temp->total_reg;
+        $obj_temp->total_reg=0;
+    $obj_temp->save();
+}
+    $obj_routine->save();
+return redirect()->back()->with('message','Saved to routine');
+
+}
+
+
+
+    public function adminGenerateRoutine(){
+        $obj_data=TempDBRotine::where('total_reg','>',0)->get();
+        return view('front-end.adminGenerateRoutine',['obj_data'=>$obj_data]);
+    }
+
+
+
+    public function routine(){
+        $obj_routine=Routine::all();
+        return view('front-end.routine',['obj_routine'=>$obj_routine]);
+    }
+
+
+
+
+
     public function saveRegCourseInfo(Request $request){
         $len=count($request->reg_type);
 

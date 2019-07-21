@@ -31,7 +31,7 @@
           <ul class="navbar-nav">
 
             <li class="nav-item dropdown active">
-              <a class="nav-link" href="{{ route('admin-generate-routine') }}">
+              <a class="nav-link" href="{{ route('generate-routine') }}">
                  <i class="fa fa-tachometer"></i><span class="menu-title">Dashboard</span>
               </a>
             </li>
@@ -39,6 +39,12 @@
             </li>
 
             <li class="nav-item dropdown">
+              <a class="nav-link" href="{{ route('/') }}" role="button">
+                <i class="fa fa-home"></i> <span class="menu-title">Home</span>
+              </a>
+         
+            </li>
+                        <li class="nav-item dropdown">
               <a class="nav-link" href="{{ route('logout') }}" role="button"  onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
                 <i class="fa fa-power-off"></i> <span class="menu-title">Logout</span>
@@ -57,64 +63,106 @@
         <div class="row">
           <div class="col-12">
             <div class="section-content">
+
+            @if(Session::get('message'))
+                <div class="alert alert-success" id="message">
+                    <h4 class=" text-center text-success"> {{ Session::get('message') }}</h4>
+                </div>
+            @endif
+            <div class=" card card-default">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
               <div class="content-head">
                 <h4 class="content-title">Routine Generate </h4><!-- /.content-title -->
               </div><!-- /.content-head -->
 
               <div class="content-details show">
                 <table id="data-table" class="table data-table table-striped table-bordered">
+
                   <thead>
                     <tr>
                       <th>#No</th>
-                      <th>Date/time</th>
+                      <!-- <th>Date/time</th> -->
                       <th>Subject</th>
-                      <th>Room No</th>
+                      <th>Total Reg</th>
                       <th>Action</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                    @foreach($obj_data as $data)
                     <tr>
-                      <td>01</td>
-                      <td>
+                      <td>{{$data->id}}</td>
+             <!--          <td>
                         <div class="date">
-                          <h6>2-05-2019</h6>
+                          <h6>{{$data->exam_date}}</h6>
                         </div>
                         <div class="time">
-                          12 pm
+                          {{ $data->exam_time }}
                         </div>
                        
-                      </td>
+                      </td> -->
                       <td>
                           <div>
-                            <h6>System Analysis - <span class="student-amount">04</span></h6>
+                            <h6>{{ $data->course_title }} </h6>
                           </div>
                           
                       </td>
                       <td>
-                        <h6>501 AB</h6>
+                        <h6><span class="student-amount">{{ $data->total_reg }} </span> </h6>
                       
                       </td>
                       <td class="action">
                         <ul>
-                          <li><a href="#" target="blank" class="profile">Save</a></li>
-                          <li><a href="#" data-toggle="modal" data-target="#dateNtime" target="blank" class="profile">Edit</a></li>
+                          <!-- <li><a href="#" target="blank" class="profile">Save</a></li> -->
+                          <li><a href="#" data-toggle="modal" data-target="#dateNtime-{{$data->id}}" class="profile">Save to Routine</a></li>
 
                         </ul>
                       </td>
                     </tr>
+
+
+
+  <div class="modal fade" id="dateNtime-{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="dateNtime" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Save To Routine</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="change-option">
+          <form action="{{ route('save-routine-data')}}" method="POST">
+            @csrf
+              <label>Set Date : </label>
+              <input type="date" class="change-option" name="exam_date" placeholder="Set Date"></input>
+              <input type="hidden"  value="{{$data->id}}"class="change-option" name="reg_id"></input>
+              <input type="hidden"  value="{{ $data->course_title }}" class="change-option" name="course_title"></input>
+              <label>Set Time : </label>
+              <input class="change-option" name="exam_time" placeholder="Set Time"></input>
+               <label>Room no : </label>
+              <input class="change-option" name="room_no" placeholder="Room No"></input>
+              <input class="btn btn-info" type="submit" name="btn" ></input>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+                    @endforeach
             
                   </tbody>
 
-                  <tfoot>
-                    <tr>
-                      <th>#No</th>
-                      <th>Date/time</th>
-                      <th>Subject</th>
-                      <th>Room No</th>
-                      <th>Action</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div><!-- /.content-details -->
             </div>
@@ -138,27 +186,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="dateNtime" tabindex="-1" role="dialog" aria-labelledby="dateNtime" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Change Date and Time</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="change-option">
-          <label>Change Date : </label>
-          <input type="date" class="change-option" placeholder="Change Date"></input>
-          <label>Change Time : </label>
-          <input class="change-option" placeholder="Change Time"></input>
-           <label>Change Subject Code : </label>
-          <input class="change-option" placeholder="Change Room No"></input>
-          <input class="btn btn-info" type="submit" name="btn" ></input>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 
 
