@@ -216,14 +216,14 @@ public function saveRoutineData(Request $request){
 
     $obj_temp=TempDBRotine::find($request->reg_id);
     // $stu=RegisterCourse::where('course_title',$obj_temp->course_title)->get();
-
+// return $obj_routine;
 
 foreach ($obj_routine as $value) {
 $sub=$value->subject;
 
     $oobj=Db::table('register_courses as t1')
     ->join('register_courses as t2','t1.student_id','=','t2.student_id')
-    ->where('t1.student_id',$request->reg_id)
+    ->where('t1.semister',$request->semister)
     ->where(function($query) use ($course_title,$sub){
         $query->where('t2.course_title', '=', $sub);
         $query->where('t1.course_title', '=', $course_title);
@@ -238,29 +238,30 @@ $sub=$value->subject;
 // return $oobj;
 
     foreach ($oobj as $st) {
-        if($course_title!=$st->course_title && $value->exam_time==$request->exam_time && $value->exam_date==$request->exam_date ){
+        if($course_title !=$st->course_title && $value->exam_time==$request->exam_time && $value->exam_date==$request->exam_date ){
             return redirect()->back()->with('message','Some student have exam on this date on this time. Please change date or time');
 
+        }elseif($course_title ==$st->course_title && $value->exam_time==$request->exam_time && $value->exam_date==$request->exam_date){
+            $obj_routine=new Routine();
+            $obj_routine->subject=$obj_temp->course_title;
+            $obj_routine->exam_date=$request->exam_date;
+            $obj_routine->exam_time=$request->exam_time;
+            $obj_routine->room_no=$request->room_no;
+            if($obj_temp->total_reg>51){
+            $obj_routine->total=50;
+            $obj_temp->total_reg=$obj_temp->total_reg-50;
+            $obj_temp->save();
         }else{
-                
-    $obj_routine=new Routine();
-    $obj_routine->subject=$obj_temp->course_title;
-    $obj_routine->exam_date=$request->exam_date;
-    $obj_routine->exam_time=$request->exam_time;
-    $obj_routine->room_no=$request->room_no;
-    if($obj_temp->total_reg>51){
-    $obj_routine->total=50;
-    $obj_temp->total_reg=$obj_temp->total_reg-50;
-    $obj_temp->save();
-}else{
-    $obj_routine->total=$obj_temp->total_reg;
-        $obj_temp->total_reg=0;
-    $obj_temp->save();
-}
-    $obj_routine->save();
-    return redirect()->back()->with('message','Saved to routine');
+            $obj_routine->total=$obj_temp->total_reg;
+                $obj_temp->total_reg=0;
+            $obj_temp->save();
+        }
+            $obj_routine->save();
+        return redirect()->back()->with('message','Saved to routine');
+
 
         }
+
     }
 }
 

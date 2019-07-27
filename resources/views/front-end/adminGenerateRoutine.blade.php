@@ -44,6 +44,14 @@
               </a>
          
             </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="{{ route('routine') }}" target="_blank" role="button">
+                <i class="fa fa-home"></i> <span class="menu-title">Rutine</span>
+              </a>
+         
+            </li>
+
                         <li class="nav-item dropdown">
               <a class="nav-link" href="{{ route('logout') }}" role="button"  onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
@@ -147,6 +155,7 @@
               <input type="date" class="change-option" name="exam_date" placeholder="Set Date"></input>
               <input type="hidden"  value="{{$data->id}}"class="change-option" name="reg_id"></input>
               <input type="hidden"  value="{{ $data->course_title }}" class="change-option" name="course_title"></input>
+              <input type="hidden"  value="{{ $data->semister }}" class="change-option" name="semister"></input>
               <label>Set Time : </label>
               <input class="change-option" name="exam_time" placeholder="Set Time"></input>
                <label>Room no : </label>
