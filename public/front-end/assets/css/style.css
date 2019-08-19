@@ -1692,3 +1692,14 @@ footer {
   height: 30x;
 }
 
+.course-title {
+  padding-bottom: 30px;
+}
+
+.add-file span {
+    position: relative;
+    left: -50px;
+    color: #1fb5ad;
+}
+
+

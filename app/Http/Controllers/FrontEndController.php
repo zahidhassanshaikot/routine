@@ -150,7 +150,10 @@ class FrontEndController extends Controller
     public function studentInfo(){
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', '=', 'Student');
-        })->orderBy('created_at', 'desc')->get();
+        })
+        ->join('register_courses','register_courses.student_id','=','users.id')
+        ->select('users.*','register_courses.image','register_courses.course_title')
+        ->orderBy('users.created_at', 'desc')->get();
 
         return view('front-end.studentInfo',['users'=>$users]);
     }
@@ -308,6 +311,7 @@ return redirect()->back()->with('message','Saved to routine');
         $len=count($request->reg_type);
 
 for($i=0;$i<$len;$i++){
+    // dd($request->file('image'));
     $obj_RegisterCourse=new RegisterCourse();
     $obj_RegisterCourse->student_id=$request->student_id;
     $obj_RegisterCourse->reg_type=$request->reg_type[$i];
@@ -316,6 +320,21 @@ for($i=0;$i<$len;$i++){
     $obj_RegisterCourse->course_title=$request->course_title[$i];
     $obj_RegisterCourse->exam_type=$request->exam_type[$i];
     $obj_RegisterCourse->semister=$request->semister[$i];
+    if($request->reg_type[$i]=='Improvement'){
+        if ($request->file('image')) {
+            $this->validate($request, [
+                'image' => 'required|mimes:jpg,JPG,JPEG,jpeg|max:2048',
+            ]);
+        
+            $profileImage = $request->file('image');
+            $fileType = $profileImage->getClientOriginalExtension();
+            $imageName = date('YmdHis') . "ab" . rand(5, 10) . '.' . $fileType;
+            $directory = 'images/';
+            $imageUrl = $directory . $imageName;
+            Image::make($profileImage)->save($imageUrl);
+            $obj_RegisterCourse->image = $imageUrl;
+        }
+    }
     $obj_RegisterCourse->save();
 
 }

@@ -53,6 +53,8 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Department</th>
+                        <th>Course Title</th>
+                        <th>Image</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -76,6 +78,12 @@
                         </td>
                         <td>
                           <h6>{{ $user->dept }}</h6>
+                        </td>
+                        <td>
+                          <h6>{{ $user->course_title }}</h6>
+                        </td>
+                        <td>
+                          <h6><img src="{{ asset($user->image) }}" style="height: 75px;width: 75px" alt=""></h6>
                         </td>
                         <td class="action">
                           <ul>

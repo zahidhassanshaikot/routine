@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2019 at 07:47 AM
+-- Generation Time: Aug 15, 2019 at 05:54 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -69,6 +69,7 @@ CREATE TABLE `register_courses` (
   `course_title` varchar(191) DEFAULT NULL,
   `exam_type` varchar(191) DEFAULT NULL,
   `semister` varchar(191) DEFAULT NULL,
+  `image` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -77,15 +78,19 @@ CREATE TABLE `register_courses` (
 -- Dumping data for table `register_courses`
 --
 
-INSERT INTO `register_courses` (`id`, `student_id`, `reg_type`, `teacher_init`, `course_code`, `course_title`, `exam_type`, `semister`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Improvement', 'tt', 'SWE101', 'OOP', 'Mid Term', 'Spring 2019', '2019-07-17 00:54:58', '2019-07-17 00:54:58'),
-(2, 1, 'Improvement', 'tt', 'SWE102', 'Testing', 'Final', 'Spring 2019', '2019-07-17 00:54:58', '2019-07-17 00:54:58'),
-(3, 2, 'Improvement', 'rr', 'SWE101', 'OOP', 'Mid Term', 'Spring 2019', '2019-07-17 22:23:40', '2019-07-17 22:23:40'),
-(4, 1, 'Overlap', 'KS', 'SWE104', 'Math', 'Mid Term', 'Spring 2019', '2019-07-17 22:23:40', '2019-07-17 22:23:40'),
-(5, 3, 'Improvement', 'ww', 'SWE101', 'OOP', 'Mid Term', 'Spring 2019', '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
-(6, 3, 'Improvement', 'ww', 'SWE104', 'Math', 'Mid Term', 'Spring 2019', '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
-(7, 3, 'Improvement', 'ee', 'SWE103', 'System Analysis', 'Mid Term', 'Spring 2019', '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
-(8, 4, 'Improvement', 'ee', 'SWE103', 'System Analysis', 'Mid Term', 'Spring 2019', '2019-07-19 23:50:57', '2019-07-19 23:50:57');
+INSERT INTO `register_courses` (`id`, `student_id`, `reg_type`, `teacher_init`, `course_code`, `course_title`, `exam_type`, `semister`, `image`, `created_at`, `updated_at`) VALUES
+(3, 2, 'Improvement', 'rr', 'SWE101', 'OOP', 'Mid Term', 'Spring 2019', NULL, '2019-07-17 22:23:40', '2019-07-17 22:23:40'),
+(5, 3, 'Improvement', 'ww', 'SWE101', 'OOP', 'Mid Term', 'Spring 2019', NULL, '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
+(6, 3, 'Improvement', 'ww', 'SWE104', 'Math', 'Mid Term', 'Spring 2019', NULL, '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
+(7, 3, 'Improvement', 'ee', 'SWE103', 'System Analysis', 'Mid Term', 'Spring 2019', NULL, '2019-07-19 23:47:49', '2019-07-19 23:47:49'),
+(8, 4, 'Improvement', 'ee', 'SWE103', 'System Analysis', 'Mid Term', 'Spring 2019', NULL, '2019-07-19 23:50:57', '2019-07-19 23:50:57'),
+(10, 1, 'Improvement', 'tt', 'SWE102', 'OOP', 'Mid Term', 'Spring 2019', NULL, '2019-07-26 11:13:15', '2019-07-26 11:13:15'),
+(11, 1, 'Improvement', 'tt', 'SWE103', 'System Analysis', 'Mid Term', 'Spring 2019', NULL, '2019-07-26 11:13:15', '2019-07-26 11:13:15'),
+(12, 1, 'Improvement', 'ee', 'SWE104', 'Math', 'Mid Term', 'Spring 2019', NULL, '2019-07-26 11:13:15', '2019-07-26 11:13:15'),
+(13, 1, 'Improvement', 'KS', 'SWE101', 'OOP', 'Final', 'Fall 2019', NULL, '2019-08-15 09:41:05', '2019-08-15 09:41:05'),
+(14, 1, 'Improvement', 'ee', 'SWE103', 'System Analysis', 'Final', 'Fall 2019', NULL, '2019-08-15 09:41:05', '2019-08-15 09:41:05'),
+(15, 1, 'Improvement', 'tt', 'SWE102', 'Math', 'Final', 'Fall 2019', 'images/20190815154342ab7.jpg', '2019-08-15 09:43:42', '2019-08-15 09:43:42'),
+(16, 1, 'Overlap', 'KS', 'SWE104', 'Math', 'Final', 'Fall 2019', NULL, '2019-08-15 09:43:43', '2019-08-15 09:43:43');
 
 -- --------------------------------------------------------
 
@@ -139,8 +144,8 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 
 CREATE TABLE `routine` (
   `id` int(11) NOT NULL,
-  `exam_date` varchar(191) NOT NULL,
-  `exam_time` varchar(191) NOT NULL,
+  `exam_date` varchar(191) DEFAULT NULL,
+  `exam_time` varchar(191) DEFAULT NULL,
   `subject` varchar(191) NOT NULL,
   `total` int(11) DEFAULT NULL,
   `room_no` varchar(191) DEFAULT NULL,
@@ -153,9 +158,9 @@ CREATE TABLE `routine` (
 --
 
 INSERT INTO `routine` (`id`, `exam_date`, `exam_time`, `subject`, `total`, `room_no`, `created_at`, `updated_at`) VALUES
-(1, '2019-07-21', '10AM', 'System Analysis', 2, '606AB', '2019-07-20 23:44:54', '2019-07-20 23:44:54'),
-(2, '2019-07-21', '10AM', 'OOP', 3, '606AB', '2019-07-20 23:45:06', '2019-07-20 23:45:06'),
-(3, '2019-07-21', '4PM', 'Math', 2, '606AB', '2019-07-20 23:45:33', '2019-07-20 23:45:33');
+(1, '2019-08-07', '4PM', 'Math', 2, '606AB', '2019-08-07 04:34:58', '2019-08-07 04:35:16'),
+(2, NULL, NULL, 'OOP', 3, NULL, '2019-08-07 04:34:58', '2019-08-07 04:34:58'),
+(3, NULL, NULL, 'System Analysis', 3, NULL, '2019-08-07 04:34:58', '2019-08-07 04:34:58');
 
 -- --------------------------------------------------------
 
@@ -171,15 +176,6 @@ CREATE TABLE `temp_db_routine` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `temp_db_routine`
---
-
-INSERT INTO `temp_db_routine` (`id`, `course_title`, `semister`, `total_reg`, `created_at`, `updated_at`) VALUES
-(1, 'Math', 'Spring 2019', 0, '2019-07-20 23:44:34', '2019-07-20 23:45:33'),
-(2, 'OOP', 'Spring 2019', 0, '2019-07-20 23:44:34', '2019-07-20 23:45:06'),
-(3, 'System Analysis', 'Spring 2019', 0, '2019-07-20 23:44:34', '2019-07-20 23:44:53');
 
 -- --------------------------------------------------------
 
@@ -272,7 +268,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `register_courses`
 --
 ALTER TABLE `register_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -290,13 +286,13 @@ ALTER TABLE `routine`
 -- AUTO_INCREMENT for table `temp_db_routine`
 --
 ALTER TABLE `temp_db_routine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
